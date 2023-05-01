@@ -1,0 +1,15 @@
+class Solution {
+public:
+    double average(vector<int>& salary) {
+        int lo=INT_MAX,hi=INT_MIN,sum=0;
+
+       for(int i=0;i<salary.size();i++)
+       {
+           hi=max(hi,salary[i]);
+           lo=min(lo,salary[i]);
+           sum+=salary[i];
+       }
+
+       return (double)(sum - hi - lo)/(salary.size()-2); 
+    }
+};
