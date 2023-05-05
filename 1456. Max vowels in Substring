@@ -1,0 +1,53 @@
+class Solution {
+public:
+    int maxVowels(string s, int k) {
+
+        //step 1 create window of size k and get vowel count
+        //you might as well make a function check if s[i] is vowel 
+        //or make a if statement with 5 or conditions.
+        char vowel[] = {'a','e','i','o','u'};
+        int count=0;
+
+        for(int i=0;i<k;i++)
+        { 
+            int j=0;
+            while(j<5)
+            {
+                if(s[i]==vowel[j])
+                {
+                    count++;
+                    break;
+                }
+                j++;   
+            }
+        }
+
+        int maxcount=count;
+
+        //we iterate rest of the string and update the vowel count
+        //as we move forward by 1, if vowel encountered ... increase count by 1
+        
+        //we have to keep window size as k, so when we shorten the window from left by 1,
+        // we check if leftmost character in window was a vowel, 
+        //in that case we decrease count by 1.
+
+        //we keep checking for the max count of vowels we get. 
+
+        for(int i=k;i<s.length();i++)
+        {
+            int j=0;
+            while(j<5)
+            {
+                if(s[i]==vowel[j])
+                    count++;
+
+                if(s[i-k]==vowel[j])
+                    count--;
+                j++;   
+            }
+            maxcount=max(maxcount,count);
+        }
+
+        return maxcount;
+    }
+};
