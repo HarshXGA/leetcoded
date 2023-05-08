@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int numWays(string s) {
+        int n=s.length();
+
+        vector<int> count(n);
+        int total=0;
+
+        for(int i=0;i<n;i++)
+        {   
+            if(s[i]=='1')
+                total++;
+            count[i] = total;         
+        }
+        
+        if(total%3!=0)
+            return 0;
+
+        if(total==0)
+            return (long)(n-1)*(n-2)/2 % 1000000007;
+
+        long int first=0,second=0;
+
+        for(int i=0;i<n;i++)
+        {
+            if(count[i]==total/3)
+                first++;
+            if(total - count[i] ==total/3)
+                second++;
+        }
+
+      return (first*second)%1000000007;
+    }
+};
