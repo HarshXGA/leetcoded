@@ -1,0 +1,39 @@
+class Solution {  
+public:
+    vector<int> colorTheArray(int n, vector<vector<int>>& q) {
+        vector<int> ans (q.size());
+        vector<int> nums(n+1,0);
+        int count=0;
+
+        for(int i=0;i<q.size();i++)
+        {   
+            int index = q[i][0], newcolor = q[i][1];
+            int initial = nums[index];
+            nums[index]=newcolor;
+            
+            if(initial==newcolor)
+                {
+                ans[i]=count;
+                continue;
+                }
+            if(index!=0 && nums[index-1]!=0)
+            {
+                if(nums[index-1]==newcolor)
+                    count++;
+                else if(nums[index-1]==initial)
+                    count--;
+            }
+            if(index<n && nums[index+1]!=0)
+            {
+                if(nums[index+1]==newcolor)
+                    count++;
+                else if(nums[index+1]==initial)
+                   count--;
+            }     
+            ans[i]=count;
+        }
+        
+        return ans;
+        
+    }
+};
